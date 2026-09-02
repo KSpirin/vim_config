@@ -1,0 +1,14 @@
+# Vim backup/swap/undo
+.vim/
+
+# macOS
+.DS_Store
+._*
+
+# Editors
+*.swp
+*.swo
+*~
+
+# Old files
+readthis.md
