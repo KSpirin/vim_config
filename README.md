@@ -47,12 +47,13 @@ mv ~/.vimrc.backup.<timestamp> ~/.vimrc
 
 - **Zero plugins** — everything uses built-in Vim features
 - **Space as leader** — `Space w` to save, `Space q` to quit, `Space e` for file explorer
-- **Smart defaults** — syntax on, line numbers, smart search, auto-indent
-- **Window navigation** — `Ctrl+h/j/k/l` to move between splits
-- **One-key code runner** — `Space r` runs C, C++, Java, Python
+- **Built-in cheat sheet & panic button** — `Space ?` to view shortcuts anytime, `Space o` to close all extra splits/panels and keep only your code
+- **Smart defaults** — syntax on, line numbers, smart search, auto-indent, statusline with quick hints
+- **Seamless window & terminal navigation** — `Ctrl+h/j/k/l` moves between splits and jumps straight out of terminal mode (`Esc Esc` also exits terminal mode)
+- **One-key code runner** — `Space r` runs C, C++, Java, Python in a clean bottom split (auto-replaces old runner splits so windows never stack up)
 - **Git shortcuts** — `Space gs`, `Space gd`, `Space gl`, `Space ga`
-- **Project search** — `Space /` with ripgrep + quickfix navigation
-- **Pink/purple color scheme** — custom 256-color theme with rainbow braces
+- **Project search** — `Space /` with ripgrep + auto-opening Quickfix navigation
+- **Pink/purple color scheme** — custom 256-color theme with rainbow braces and matching bracket highlight
 
 See [vim-dictionary.md](vim-dictionary.md) for the full reference guide.
 

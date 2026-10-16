@@ -9,11 +9,16 @@ VIMRC_DST="$HOME/.vimrc"
 echo "=== Vim Environment Installer ==="
 echo ""
 
-# --- Back up existing .vimrc ---
-if [ -f "$VIMRC_DST" ] || [ -L "$VIMRC_DST" ]; then
+# --- Back up existing .vimrc (skip if already symlinked to this repo) ---
+if [ -L "$VIMRC_DST" ] && [ "$(readlink "$VIMRC_DST")" = "$VIMRC_SRC" ]; then
+    echo "[skip]    $VIMRC_DST already links to $VIMRC_SRC"
+elif [ -f "$VIMRC_DST" ]; then
     BACKUP="$VIMRC_DST.backup.$(date +%Y%m%d%H%M%S)"
     echo "[backup]  $VIMRC_DST → $BACKUP"
     cp "$VIMRC_DST" "$BACKUP"
+elif [ -L "$VIMRC_DST" ]; then
+    echo "[remove]  Removing broken symlink $VIMRC_DST"
+    rm -f "$VIMRC_DST"
 fi
 
 # --- Symlink .vimrc ---

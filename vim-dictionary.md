@@ -396,48 +396,53 @@ Quickfix works with: `:grep`, `:make`, `Space /` (ripgrep), compiler errors.
 
 #### Creating
 
-| Key / Command | Action           |
-| ------------- | ---------------- |
-| `Ctrl+w s`       | Horizontal split |
-| `Ctrl+w v`       | Vertical split   |
-| `:split`      | Horizontal split |
-| `:vsplit`     | Vertical split   |
+| Key / Command | Action           | Source  |
+| ------------- | ---------------- | ------- |
+| **`Space s`** | Horizontal split | Config  |
+| **`Space v`** | Vertical split   | Config  |
+| `Ctrl+w s`    | Horizontal split | Default |
+| `Ctrl+w v`    | Vertical split   | Default |
+| `:split`      | Horizontal split | Default |
+| `:vsplit`     | Vertical split   | Default |
 
 #### Navigating
 
-| Key     | Action                           | Source  |
-| ------- | -------------------------------- | ------- |
-| `Ctrl+h`   | Go to left window                | Config  |
-| `Ctrl+j`   | Go to window below               | Config  |
-| `Ctrl+k`   | Go to window above               | Config  |
-| `Ctrl+l`   | Go to right window               | Config  |
+| Key        | Action                           | Source  |
+| ---------- | -------------------------------- | ------- |
+| `Ctrl+h`   | Go to left window (works in Terminal too)  | Config  |
+| `Ctrl+j`   | Go to window below (works in Terminal too) | Config  |
+| `Ctrl+k`   | Go to window above (works in Terminal too) | Config  |
+| `Ctrl+l`   | Go to right window (works in Terminal too) | Config  |
 | `Ctrl+w w` | Cycle to next window             | Default |
 | `Ctrl+w p` | Go to previously active window   | Default |
 
 #### Managing
 
-| Key     | Action                              |
-| ------- | ----------------------------------- |
-| `Ctrl+w o` | **Close all other windows**         |
-| `Ctrl+w q` | Close current window                |
-| `Ctrl+w c` | Close current window                |
-| `Ctrl+w =` | Equalize all window sizes           |
-| `Ctrl+w +` | Increase height                     |
-| `Ctrl+w -` | Decrease height                     |
-| `Ctrl+w >` | Increase width                      |
-| `Ctrl+w <` | Decrease width                      |
+| Key           | Action                                             | Source  |
+| ------------- | -------------------------------------------------- | ------- |
+| **`Space o`** | **Panic button: Keep ONLY code window, close all others** | Config |
+| **`Space q`** | Close current window                               | Config  |
+| `Ctrl+w o`    | Close all other windows                            | Default |
+| `Ctrl+w q`    | Close current window                               | Default |
+| `Ctrl+w c`    | Close current window                               | Default |
+| `Ctrl+w =`    | Equalize all window sizes                          | Default |
+| `Ctrl+w +`    | Increase height                                    | Default |
+| `Ctrl+w -`    | Decrease height                                    | Default |
+| `Ctrl+w >`    | Increase width                                     | Default |
+| `Ctrl+w <`    | Decrease width                                     | Default |
 
 ### Buffers
 
-| Key / Command    | Action          | Source  |
-| ---------------- | --------------- | ------- |
-| `:ls`            | List buffers    | Default |
-| `:bnext`         | Next buffer     | Default |
-| `:bprevious`     | Previous buffer | Default |
-| `:bdelete`       | Delete buffer   | Default |
-| **`Space bn`**  | Next buffer     | Config  |
-| **`Space bp`**  | Previous buffer | Config  |
-| **`Space bd`**  | Delete buffer   | Config  |
+| Key / Command       | Action                        | Source  |
+| ------------------- | ----------------------------- | ------- |
+| `:ls`               | List buffers                  | Default |
+| `:bnext`            | Next buffer                   | Default |
+| `:bprevious`        | Previous buffer               | Default |
+| `:bdelete`          | Delete buffer                 | Default |
+| **`Space Space`**   | Switch to last active file    | Config  |
+| **`Space bn`**      | Next buffer                   | Config  |
+| **`Space bp`**      | Previous buffer               | Config  |
+| **`Space bd`**      | Delete buffer                 | Config  |
 
 ### Tabs
 
@@ -492,7 +497,7 @@ With `set path+=**` in the config, `:find` searches recursively through all subd
 
 Open with **`Space /`**
 
-Runs `rg --vimgrep --smart-case` and loads results into the [Quickfix list](#quickfix-list). Use `Space cn` / `Space cp` to navigate results.
+Runs `rg --vimgrep --smart-case` and automatically opens the [Quickfix list](#quickfix-list) if matches are found. Use `Space cn` / `Space cp` to navigate results, or `Space o` to close the Quickfix panel.
 
 ---
 
@@ -500,14 +505,16 @@ Runs `rg --vimgrep --smart-case` and loads results into the [Quickfix list](#qui
 
 ### Terminal
 
-| Key / Shortcut | Action                   |
-| -------------- | ------------------------ |
-| **`Space t`**  | Open terminal below      |
-| `Ctrl+\ Ctrl+n`     | Exit terminal → Normal mode |
+| Key / Shortcut      | Action                                         |
+| ------------------- | ---------------------------------------------- |
+| **`Space t`**       | Open terminal below (replaces old terminal split) |
+| **`Esc Esc`**       | Exit terminal mode → Normal mode *(config)*    |
+| **`Ctrl+h/j/k/l`**  | Jump directly out of terminal to another window *(config)* |
+| `Ctrl+\ Ctrl+n`     | Exit terminal → Normal mode *(default)*        |
 
 ### Run Code
 
-All triggered with **`Space r`** — saves the file, compiles (if needed), and runs:
+All triggered with **`Space r`** — saves the file, automatically closes any previous terminal split (so windows never stack up), compiles (if needed), and runs:
 
 | Language | Command                                         |
 | -------- | ------------------------------------------------ |
@@ -552,6 +559,10 @@ In Insert mode:
 
 ## Settings & Help
 
+### In-Vim Cheat Sheet
+
+Forgot a shortcut while inside Vim? Press **`Space ?`** in Normal mode to display a compact reference of all `Space` shortcuts at the bottom of the screen.
+
 ### Useful Settings
 
 | Command              | Effect                    |
@@ -585,48 +596,45 @@ Things can get messy when panels and splits pile up. Here's how to recover.
 
 ### Too many splits / windows open
 
-You pressed `Space e`, `Space t`, `Space r`, or `Ctrl+w s` multiple times and now you have a mess of windows.
+You opened Netrw (`Space e`), Terminal (`Space t`), Quickfix (`Space /`), or splits (`Space v` / `Space s`) and now you have a mess of windows.
 
-| What you want                    | Key         |
-| -------------------------------- | ----------- |
-| **Keep only the window you're in, close everything else** | `Ctrl+w o` |
-| Close just the current window    | `Ctrl+w q`     |
-| Close one window at a time       | Move to it with `Ctrl+h/j/k/l`, then `Ctrl+w q` |
+| What you want                                             | Key           |
+| --------------------------------------------------------- | ------------- |
+| **Keep ONLY your code window, close everything else**     | **`Space o`** |
+| Close just the current window                             | **`Space q`** |
+| Show the in-Vim cheat sheet when you forget what to press | **`Space ?`** |
 
-> **`Ctrl+w o` is the panic button** — it instantly goes back to a single clean window.
+> **`Space o` is the smart panic button** — even if your cursor is currently inside Netrw, Quickfix, or Normal-mode Terminal, it jumps back to your code window and closes all other panels at once.
 
 ### Netrw explorer won't go away
 
-`Space e` opens `:Lexplore`, which is a **toggle** — press `Space e` again to close it. If that doesn't work:
+`Space e` opens `:Lexplore`, which is a **toggle** — press `Space e` again to close it. Or just use `Space o`:
 
 | Fix                               | How                          |
 | --------------------------------- | ---------------------------- |
+| Panic button: keep only code      | `Space o`                    |
 | Toggle it off                     | `Space e` (press again)      |
-| Close it as a window              | Move to it with `Ctrl+h`, then `Ctrl+w q` |
-| Nuclear: close all other windows  | Focus your code, then `Ctrl+w o` |
 
-### Stuck in a terminal split
+### Stuck in a terminal split (`Space t` or `Space r`)
 
-`Space t` or `Space r` opens a terminal. Terminal mode captures all your keys — including `Esc`.
+Terminal mode captures keys, so single `Esc` or `Space` goes to the shell instead of Vim. This config adds direct escapes:
 
-| Step | Action                              |
-| ---- | ----------------------------------- |
-| 1    | `Ctrl+\ Ctrl+n` — exit terminal mode back to Normal |
-| 2    | `Ctrl+w q` — close the terminal window |
-
-Or skip straight to: `Ctrl+\ Ctrl+n` then `Ctrl+w o` to close everything else.
+| What you want                           | Key                           |
+| --------------------------------------- | ----------------------------- |
+| Jump straight back to your code window  | **`Ctrl+k`** (or `Ctrl+h/j/l`) |
+| Exit Terminal mode to Normal mode       | **`Esc Esc`** (press `Esc` twice) |
+| Exit and close everything except code   | **`Esc Esc`** then **`Space o`** |
 
 ### Ran code (`Space r`) and output is blocking
 
-`Space r` opens a terminal split with your program's output. When you're done reading:
+`Space r` automatically replaces any previous terminal split (so windows won't stack up). When you're done reading the output:
 
 | Fix                              | How                               |
 | -------------------------------- | --------------------------------- |
-| Close the output split           | `Ctrl+\ Ctrl+n` then `Ctrl+w q`           |
-| Go back to your code, keep output| `Ctrl+k` or `Ctrl+w p`                 |
-| Close everything except your code| Focus your code, then `Ctrl+w o`    |
+| Close everything except your code| `Ctrl+k` then `Space o` (or `Esc Esc` then `Space o`) |
+| Go back to your code, keep output| `Ctrl+k`                          |
 
-### Git/grep command output is showing, can't get back
+### Git command output is showing, can't get back
 
 `Space gs`, `Space gd`, `Space gl` run shell commands. The output shows in a full-screen view.
 
@@ -636,20 +644,19 @@ Or skip straight to: `Ctrl+\ Ctrl+n` then `Ctrl+w o` to close everything else.
 
 ### Quickfix window appeared and won't close
 
-After `Space /` (grep) or `:make`, a Quickfix window may open.
+After `Space /` (grep), the Quickfix window opens automatically if matches are found.
 
 | Fix                          | How              |
 | ---------------------------- | ---------------- |
-| Close Quickfix               | `Space cc`       |
-| Close it as a window         | `Ctrl+w q` (while in Quickfix window) |
-| Close everything else        | Focus your code, then `Ctrl+w o`  |
+| Close everything except code | `Space o`        |
+| Close Quickfix only          | `Space cc`       |
 
-### Summary: the 3 keys that fix almost everything
+### Summary: the 3 shortcuts that fix almost everything
 
 ```
-Ctrl+\ Ctrl+n     Get out of terminal mode
-Ctrl+w q          Close current window
-Ctrl+w o          Keep ONLY current window (close all others)
+Space ?           Show in-Vim cheat sheet when you forget keys
+Esc Esc / Ctrl+k  Get out of terminal mode back to your code
+Space o           Keep ONLY your code window (close all others)
 ```
 
 ---
@@ -658,27 +665,33 @@ Ctrl+w o          Keep ONLY current window (close all others)
 
 All shortcuts below use `Space` as the leader key.
 
-| Shortcut      | Action                     |
-| ------------- | -------------------------- |
-| `Space w`     | Save                       |
-| `Space q`     | Quit                       |
-| `Space e`     | File explorer (Netrw)      |
-| `Space f`     | Find file                  |
-| `Space /`     | Project search (ripgrep)   |
-| `Space t`     | Terminal                   |
-| `Space r`     | Run current file           |
-| `Space h`     | Clear search highlight     |
-| `Space bn`    | Next buffer                |
-| `Space bp`    | Previous buffer            |
-| `Space bd`    | Delete buffer              |
-| `Space co`    | Open Quickfix              |
-| `Space cc`    | Close Quickfix             |
-| `Space cn`    | Next Quickfix result       |
-| `Space cp`    | Previous Quickfix result   |
-| `Space gs`    | Git status                 |
-| `Space gd`    | Git diff                   |
-| `Space gl`    | Git log (graph, last 20)   |
-| `Space ga`    | Git add current file       |
+| Shortcut        | Action                                           |
+| --------------- | ------------------------------------------------ |
+| `Space ?`       | **Show in-Vim cheat sheet**                      |
+| `Space o`       | **Keep ONLY code window (close all other splits/panels)** |
+| `Space w`       | Save                                             |
+| `Space q`       | Close current window                             |
+| `Space Q`       | Quit Vim entirely (`:qa`)                        |
+| `Space v`       | Vertical split                                   |
+| `Space s`       | Horizontal split                                 |
+| `Space Space`   | Switch to last active file (buffer)              |
+| `Space e`       | File explorer (Netrw toggle)                     |
+| `Space f`       | Find file                                        |
+| `Space /`       | Project search (ripgrep, auto-opens Quickfix)    |
+| `Space t`       | Terminal (reuses bottom split)                   |
+| `Space r`       | Run current file (C, C++, Java, Python)          |
+| `Space h`       | Clear search highlight                           |
+| `Space bn`      | Next buffer                                      |
+| `Space bp`      | Previous buffer                                  |
+| `Space bd`      | Delete buffer                                    |
+| `Space co`      | Open Quickfix                                    |
+| `Space cc`      | Close Quickfix                                   |
+| `Space cn`      | Next Quickfix result                             |
+| `Space cp`      | Previous Quickfix result                         |
+| `Space gs`      | Git status                                       |
+| `Space gd`      | Git diff                                         |
+| `Space gl`      | Git log (graph, last 20)                         |
+| `Space ga`      | Git add current file                             |
 
 ---
 
@@ -686,23 +699,23 @@ All shortcuts below use `Space` as the leader key.
 
 If you're just getting started, learn in this order:
 
-| Phase | Keys                           | Skill                      |
-| ----- | ------------------------------ | -------------------------- |
-| 1     | `Esc`                          | Always return to Normal    |
-| 2     | `i` / `a` / `o`               | Enter Insert mode          |
-| 3     | `h` `j` `k` `l`               | Basic movement             |
-| 4     | `w` / `b`                      | Word-level movement        |
-| 5     | `0` / `$`                      | Line start / end           |
-| 6     | `gg` / `G`                     | File start / end           |
-| 7     | `dd` / `yy` / `p`             | Delete, yank, paste lines  |
-| 8     | `u` / `Ctrl+r` / `.`             | Undo, redo, repeat         |
-| 9     | `/` / `n` / `N`               | Search                     |
-| 10    | `ciw` / `diw`                  | Text objects               |
-| 11    | `Ctrl+w s` / `Ctrl+w v` / `Ctrl+w o`   | Window management          |
-| 12    | `Ctrl+h` / `Ctrl+j` / `Ctrl+k` / `Ctrl+l` | Navigate windows          |
-| 13    | `Space w` / `Space q`          | Save and quit              |
-| 14    | `Space e` / `Space t` / `Space r` | Explorer, terminal, run |
-| 15    | `qa` ... `q` / `@a`           | Macros                     |
+| Phase | Keys                                      | Skill                        |
+| ----- | ----------------------------------------- | ---------------------------- |
+| 1     | `Esc` / `Space ?`                         | Normal mode & Cheat sheet    |
+| 2     | `i` / `a` / `o`                           | Enter Insert mode            |
+| 3     | `h` `j` `k` `l`                           | Basic movement               |
+| 4     | `w` / `b`                                 | Word-level movement          |
+| 5     | `0` / `$`                                 | Line start / end             |
+| 6     | `gg` / `G`                                | File start / end             |
+| 7     | `dd` / `yy` / `p`                         | Delete, yank, paste lines    |
+| 8     | `u` / `Ctrl+r` / `.`                      | Undo, redo, repeat           |
+| 9     | `/` / `n` / `N`                           | Search                       |
+| 10    | `ciw` / `diw`                             | Text objects                 |
+| 11    | `Space v` / `Space s` / `Space o`         | Split & panic-close windows  |
+| 12    | `Ctrl+h` / `Ctrl+j` / `Ctrl+k` / `Ctrl+l` | Navigate windows & terminals |
+| 13    | `Space w` / `Space q`                     | Save and quit                |
+| 14    | `Space e` / `Space t` / `Space r`         | Explorer, terminal, run      |
+| 15    | `qa` ... `q` / `@a`                       | Macros                       |
 
 > **The heart of Vim isn't memorizing shortcuts — it's composing `operator + motion`.**
 >
